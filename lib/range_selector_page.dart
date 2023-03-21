@@ -1,30 +1,27 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:random_number_generator/randomizer_page.dart';
 import 'range_selector_form.dart';
 
-class RangeSelectorPage extends StatefulWidget {
+class RangeSelectorPage extends HookWidget {
+  final formKey = GlobalKey<FormState>();
+
   RangeSelectorPage({Key? key}) : super(key: key);
 
   @override
-  State<RangeSelectorPage> createState() => _RangeSelectorPageState();
-}
-
-class _RangeSelectorPageState extends State<RangeSelectorPage> {
-  final formKey = GlobalKey<FormState>();
-  int _min = 0;
-  int _max = 0;
-
-  @override
   Widget build(BuildContext context) {
+    final min = useState<int>(0);
+    final max = useState<int>(0);
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Select Range'),
       ),
       body: RangeSelectorForm(
         formKey: formKey,
-        minValueSetter: (value) => _min = value,
-        maxValueSetter: (value) => _max = value,
+        minValueSetter: (value) => min.value = value,
+        maxValueSetter: (value) => max.value = value,
       ),
       floatingActionButton: FloatingActionButton(
         child: Icon(
@@ -36,8 +33,8 @@ class _RangeSelectorPageState extends State<RangeSelectorPage> {
             Navigator.of(context).push(
               MaterialPageRoute(
                 builder: (context) => RandomizerPage(
-                  min: _min,
-                  max: _max,
+                  min: min.value,
+                  max: max.value,
                 ),
               ),
             );
