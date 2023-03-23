@@ -32,7 +32,7 @@ class RandomizerPage extends ConsumerWidget {
           ),
         ),
         onPressed: () {
-          ref.read(randomizerProvider).generatedRandomNumber();
+          ref.read(randomizerProvider.notifier).generatedRandomNumber();
         },
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
