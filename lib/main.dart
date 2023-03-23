@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:random_number_generator/randomizer_change_notifier.dart';
 import 'range_selector_page.dart';
 
